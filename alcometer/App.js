@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { Button, StyleSheet, Text, View, TextInput } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useState } from 'react';
 import {Picker} from '@react-native-picker/picker';
@@ -35,6 +35,21 @@ export default function App() {
   genders.push({label: 'Male', value: 'male'});
   genders.push({label: 'Female', value: 'female'});
 
+  //calculating
+  function calculate() {
+    let litres = bottle * 0.33;
+    let grams = litres * 8 * 4.5;
+    let burning = weight / 10;
+    grams = grams - burning * time;
+    let result = 0;
+    if (gender === 'male') {
+      result = grams / (weight * 0.7);
+    }
+    else {
+      result = grams / (weight * 0.6);
+    }
+    setAlcohol(result.toFixed(2));
+  }
 
   //header
   const [loaded] = useFonts({
@@ -91,6 +106,9 @@ export default function App() {
           initial={0}
           onPress={(value) => {setGender(value)}}/>
       </View>
+
+      <Button onPress={calculate} title='Calculate'></Button>
+      <Text style={styles.field}>{alcohol}</Text>
 
       <StatusBar style="auto" />
 
