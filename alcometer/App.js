@@ -5,6 +5,7 @@ import { useFonts } from 'expo-font';
 export default function App() {
 
   //header
+  //pomoc
   const [loaded] = useFonts({
     Rowdies: require('./assets/fonts/Rowdies-Bold.ttf'),
   });
