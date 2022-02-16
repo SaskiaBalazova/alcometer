@@ -55,8 +55,26 @@ export default function App() {
     if (result < 0) {
       result = 0;
     }
+    
+    if (weight === 0) {
+      showAlert();
+    }
 
     setAlcohol(result.toFixed(2));
+  }
+
+  //alert
+  const showAlert = () => {
+    Alert.alert(
+      "Error",
+      "Please enter weight.",
+      [
+        {
+          text: "Ok",
+          color='#696969',
+        }
+      ]
+    );
   }
 
   //header
