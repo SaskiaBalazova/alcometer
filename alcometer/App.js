@@ -1,9 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View, TextInput } from 'react-native';
-import { useFonts } from 'expo-font';
+import { StyleSheet, Alert, Button, Text, View, TextInput } from 'react-native';
 import { useState } from 'react';
 import {Picker} from '@react-native-picker/picker';
 import RadioForm from 'react-native-simple-radio-button';
+import styles from './Styles';
+import Constants from 'expo-constants';
+import RadioButton from './components/Radiobutton';
+import { useFonts } from 'expo-font';
 
 export default function App() {
 
@@ -33,7 +36,7 @@ export default function App() {
   //genders
   const genders = Array();
   genders.push({label: 'Male', value: 'male'});
-  genders.push({label: 'Female', value: 'female'});
+  genders.push({label: 'Female', value: 'female'}); 
 
   //calculating
   function calculate() {
@@ -48,6 +51,7 @@ export default function App() {
     else {
       result = grams / (weight * 0.6);
     }
+
     setAlcohol(result.toFixed(2));
   }
 
@@ -97,17 +101,12 @@ export default function App() {
         </Picker>
       </View>
 
-      <View style={styles.field}>
-        <Text style={{fontWeight: 'bold'}}>Gender</Text>
-        <RadioForm
-          style={styles.radio}
-          buttonSize={10}
-          radio_props={genders}
-          initial={0}
-          onPress={(value) => {setGender(value)}}/>
-      </View>
+      <RadioButton genders={genders} onPress={(value) => {setGender(value)}} />
 
-      <Button onPress={calculate} title='Calculate'></Button>
+      <Button 
+      onPress={calculate} 
+      color='#696969'
+      title='Calculate'></Button>
       <Text style={styles.field}>{alcohol}</Text>
 
       <StatusBar style="auto" />
@@ -115,21 +114,3 @@ export default function App() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    //alignItems: 'center',
-    //justifyContent: 'center',
-  },
-  header: {
-    fontFamily: 'Rowdies',
-    fontSize: 30,
-    color: '#696969',
-    marginBottom: 15
-  },
-  input: {
-    marginLeft: 10
-  },
-});
