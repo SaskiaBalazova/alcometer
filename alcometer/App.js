@@ -51,6 +51,10 @@ export default function App() {
     else {
       result = grams / (weight * 0.6);
     }
+    
+    if (result < 0) {
+      result = 0;
+    }
 
     setAlcohol(result.toFixed(2));
   }
