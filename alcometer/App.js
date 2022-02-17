@@ -63,6 +63,19 @@ export default function App() {
     setAlcohol(result.toFixed(2));
   }
 
+  //colours of result
+  function colorOfResult () {
+    if (alcohol < 0.01) {
+      return "#008000"
+    }
+    else if (alcohol < 0.49 && alcohol > 0) {
+      return "#ffff00"
+    }
+    else if (alcohol > 0.49) {
+      return "#ff0000"
+    }
+  }
+
   //alert
   const showAlert = () => {
     Alert.alert(
@@ -71,7 +84,6 @@ export default function App() {
       [
         {
           text: "Ok",
-          color='#696969',
         }
       ]
     );
@@ -123,13 +135,17 @@ export default function App() {
         </Picker>
       </View>
 
-      <RadioButton genders={genders} onPress={(value) => {setGender(value)}} />
+
+      <View style={styles.field}>
+        <Text style={{fontWeight: 'bold'}}>Gender</Text>
+        <RadioButton genders={genders} onPress={(value) => {setGender(value)}} />
+      </View>
 
       <Button 
       onPress={calculate} 
       color='#696969'
       title='Calculate'></Button>
-      <Text style={styles.field}>{alcohol}</Text>
+      <Text style={styles.field, {color: colorOfResult()}}>{alcohol}</Text>
 
       <StatusBar style="auto" />
 
