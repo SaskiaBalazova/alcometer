@@ -15,23 +15,21 @@ export default function App() {
   const [bottle, setBottle] = useState(1);
   const [time, setTime] = useState(1);
   const [gender, setGender] = useState('male');
-  const [alcohol, setAlcohol] = useState(0);
+  const [alcohol, setAlcohol] = useState('');
 
   //bottles
   const bottles = Array();
   bottles.push({label: '1 bottle', value: 1});
-  bottles.push({label: '2 bottles', value: 2});
-  bottles.push({label: '3 bottles', value: 3});
-  bottles.push({label: '4 bottles', value: 4});
-  bottles.push({label: '5 bottles', value: 5});
+  for (let i = 2; i < 21; i++) {
+    bottles.push({label: [i] + ' bottles', value: i})
+  }
 
   //times
   const times = Array();
   times.push({label: '1 hour', value: 1});
-  times.push({label: '2 hours', value: 2});
-  times.push({label: '3 hours', value: 3});
-  times.push({label: '4 hours', value: 4});
-  times.push({label: '5 hours', value: 5});
+  for (let i = 2; i < 25; i++) {
+    times.push({label: [i] + ' hours', value: i})
+  }
 
   //genders
   const genders = Array();
@@ -52,10 +50,12 @@ export default function App() {
       result = grams / (weight * 0.6);
     }
     
+    //no negative results
     if (result < 0) {
       result = 0;
     }
     
+    //alert
     if (weight === 0) {
       showAlert();
     }
@@ -145,7 +145,10 @@ export default function App() {
       onPress={calculate} 
       color='#696969'
       title='Calculate'></Button>
-      <Text style={styles.field, {color: colorOfResult()}}>{alcohol}</Text>
+
+      <View style={styles.field}>
+        <Text style={styles.field, {fontWeight: 'bold', fontSize: 30, textAlign: 'center', color: colorOfResult()}}>{alcohol}</Text>
+      </View>
 
       <StatusBar style="auto" />
 
